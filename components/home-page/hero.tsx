@@ -14,8 +14,8 @@ const Hero: React.FC<{}> = () => {
             layout="responsive"
           />
         </div>
-        <h1>Hi, I`m Chris</h1>
-        <p>I blog about web development</p>
+        <h1>Hi, I`m Chris!</h1>
+        <p>I blog about web development and other related tech</p>
       </section>
     </>
   );
