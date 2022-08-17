@@ -2,15 +2,14 @@
 import { validateEmail } from "lib/contact-util";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { getDB, saveToDB } from "@lib/db-util";
+import { getData, saveData } from "@lib/db-util";
 
 type Data = {
   message: string;
+  data?: any[];
 };
 
-const db = getDB();
-
-const contactInformation = db.contact;
+const contactInformation = getData("contacts");
 
 export default function handler(
   req: NextApiRequest,
@@ -40,9 +39,12 @@ export default function handler(
     };
 
     contactInformation.push(newMessage);
-    saveToDB(db);
+    saveData("contacts", contactInformation);
 
     console.log("Storing message in db ...", { newMessage });
-    res.status(201).json({ message: "Successfully stored message!" });
+    res.status(201).json({
+      message: "Successfully stored message!",
+      data: getData("contacts"),
+    });
   }
 }
